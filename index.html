@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>LoadManager index - Addondoc</title>
+		<link rel="stylesheet" href="../style.css" type="text/css" />
+	</head>
+	<body>
+		<div id="nav">
+			<h2><a href="../docs.html">Addon Index</a></h2>
+			<h3>LoadManager</h3>
+			
+			<ul>
+				
+				<li><a href="libs/LibStub.lua.html">libs/LibStub.lua</a></li>
+				
+				<li><a href="libs/CallbackHandler-1.0.lua.html">libs/CallbackHandler-1.0.lua</a></li>
+				
+				<li><a href="libs/LibDataBroker-1.1.lua.html">libs/LibDataBroker-1.1.lua</a></li>
+				
+				<li><a href="LoadManager.lua.html">LoadManager.lua</a></li>
+				
+			</ul>
+			
+		</div>
+
+		<div id="content">
+			<h1>LoadManager</h1>
+			<h2>TOC data</h2>
+			<dl>
+				
+				<dt>Interface</dt>
+				<dd>50400</dd>
+				
+				<dt>Title</dt>
+				<dd>Load Manager</dd>
+				
+				<dt>Notes</dt>
+				<dd>A dynamic load manager for addons.</dd>
+				
+				<dt>Author</dt>
+				<dd>Predicate</dd>
+				
+				<dt>OptionalDeps</dt>
+				<dd>BlankSlate</dd>
+				
+			</dl>
+			
+			<h2>Function Summary</h2>
+			<dl>
+				
+				<dt><a href="libs/CallbackHandler-1.0.lua.html#CallbackHandler:New">CallbackHandler:New</a>(target, RegisterName, UnregisterName, UnregisterAllName, OnUsed, OnUnused)</dt>
+				<dd>----------------------------------------------------------------------- CallbackHandler:New  target            - target object to embed public APIs in RegisterName      - name of the callback registration API, default "RegisterCallback" UnregisterName    - name of the callback unregistration API, default "UnregisterCallback" UnregisterAllName - name of the API to unregister all callbacks, default "UnregisterAllCallbacks".</dd>
+				
+				<dt><a href="LoadManager.lua.html#[TOC] X-AfterLoad">[TOC] X-AfterLoad</a>(...)</dt>
+				<dd>A TOC metadata field allowing addons to specify code to be executed after conditional loading is successful.</dd>
+				
+				<dt><a href="LoadManager.lua.html#[TOC] X-LoadBy-Launcher">[TOC] X-LoadBy-Launcher</a>(icon, name)</dt>
+				<dd>A TOC metadata field allowing addons to specify that a LibDataBroker "launcher" dataobject should be created to trigger their loading.</dd>
+				
+				<dt><a href="LoadManager.lua.html#[TOC] X-LoadIf">[TOC] X-LoadIf</a>(...)</dt>
+				<dd>A TOC metadata field allowing addons to specify conditions for whether they should be loaded.</dd>
+				
+				<dt><a href="LoadManager.lua.html#[TOC] X-LoadWhen">[TOC] X-LoadWhen</a>(...)</dt>
+				<dd>A TOC metadata field allowing addons to specify events to trigger their loading.</dd>
+				
+				<dt><a href="LoadManager.lua.html#[TOC] X-LoadWhen-EVENT">[TOC] X-LoadWhen-EVENT</a>(...)</dt>
+				<dd>A TOC metadata field allowing addons to specify conditions for whether they should be loaded when an event listed in X-LoadWhen occurs.</dd>
+				
+			</dl>
+			
+			
+			
+			<h2>Functions</h2>
+			
+			<div class="doc">
+				<h3><a name="CallbackHandler:New"></a>CallbackHandler:New(target, RegisterName, UnregisterName, UnregisterAllName, OnUsed, OnUnused)</h3>
+				<p>----------------------------------------------------------------------- CallbackHandler:New  target            - target object to embed public APIs in RegisterName      - name of the callback registration API, default "RegisterCallback" UnregisterName    - name of the callback unregistration API, default "UnregisterCallback" UnregisterAllName - name of the API to unregister all callbacks, default "UnregisterAllCallbacks". false == don't publish this API.</p>
+				
+				<h4>Parameters</h4>
+				<ul>
+					
+					<li><pre class="code">target</pre>: </li>
+					
+					<li><pre class="code">RegisterName</pre>: </li>
+					
+					<li><pre class="code">UnregisterName</pre>: </li>
+					
+					<li><pre class="code">UnregisterAllName</pre>: </li>
+					
+					<li><pre class="code">OnUsed</pre>: </li>
+					
+					<li><pre class="code">OnUnused</pre>: </li>
+					
+				</ul>
+				
+				
+				
+
+				
+			</div>
+			
+			<div class="doc">
+				<h3><a name="[TOC] X-AfterLoad"></a>[TOC] X-AfterLoad(...)</h3>
+				<p>A TOC metadata field allowing addons to specify code to be executed after conditional loading is successful. This code will be executed during the event which triggers loading, and accepts the event and its args as varargs, which can be accessed through (...). This allows you to call your addon's event handler to process the event which triggered loading. If you need more code than you can fit in one TOC field, continue your string in X-AfterLoad2, X-AfterLoad3, etc.</p>
+				
+				<h4>Parameters</h4>
+				<ul>
+					
+					<li><pre class="code">...</pre>: Lua code to execute after loading.</li>
+					
+				</ul>
+				
+				
+				<h4>Usage</h4>
+				<ul>
+					
+					<li><pre class="code">## X-AfterLoad: MyAddon:OnEvent(...)</pre></li>
+					
+					<li><pre class="code">## X-AfterLoad: MyAddon:ShowFrame()</pre></li>
+					
+				</ul>
+				
+				
+
+				
+			</div>
+			
+			<div class="doc">
+				<h3><a name="[TOC] X-LoadBy-Launcher"></a>[TOC] X-LoadBy-Launcher(icon, name)</h3>
+				<p>A TOC metadata field allowing addons to specify that a LibDataBroker "launcher" dataobject should be created to trigger their loading. The created launcher will load the addon upon receiving any click from the user, and pass that click along to the addon's new LDB OnClick handler, if present.</p>
+				
+				<h4>Parameters</h4>
+				<ul>
+					
+					<li><pre class="code">icon</pre>: Path to the icon the LDB launcher should use.</li>
+					
+					<li><pre class="code">name</pre>: Optional name for the LDB launcher. If omitted, the name of the addon is used.</li>
+					
+				</ul>
+				
+				
+				
+
+				
+			</div>
+			
+			<div class="doc">
+				<h3><a name="[TOC] X-LoadIf"></a>[TOC] X-LoadIf(...)</h3>
+				<p>A TOC metadata field allowing addons to specify conditions for whether they should be loaded. This code will be executed at PLAYER_LOGIN. If your addon needs to load sooner, or its conditional needs to be evaluated later, use X-LoadWhen. If you need more code than you can fit in one TOC field, continue your string in X-LoadIf2, X-LoadIf3, etc.</p>
+				
+				<h4>Parameters</h4>
+				<ul>
+					
+					<li><pre class="code">...</pre>: Lua code that returns some value if the addon should be loaded, and returns false or nil otherwise.</li>
+					
+				</ul>
+				
+				
+				<h4>Usage</h4>
+				<ul>
+					
+					<li><pre class="code">## X-LoadIf: return select(2,UnitClass("player")) == "WARRIOR"</pre></li>
+					
+				</ul>
+				
+				
+
+				
+			</div>
+			
+			<div class="doc">
+				<h3><a name="[TOC] X-LoadWhen"></a>[TOC] X-LoadWhen(...)</h3>
+				<p>A TOC metadata field allowing addons to specify events to trigger their loading. Each event may optionally have a corresponding X-LoadWhen-EVENT field. If you need more events than you can fit in one TOC field, continue your list in X-LoadWhen2, X-LoadWhen3, etc.</p>
+				
+				<h4>Parameters</h4>
+				<ul>
+					
+					<li><pre class="code">...</pre>: List of events to trigger conditional loading.</li>
+					
+				</ul>
+				
+				
+				<h4>Usage</h4>
+				<ul>
+					
+					<li><pre class="code">## X-LoadWhen: GROUP_ROSTER_UPDATE, PLAYER_ENTERING_WORLD</pre></li>
+					
+				</ul>
+				
+				
+
+				
+				<h4>See also</h4>
+				<ul>
+					
+					<li><a href="#[TOC] X-LoadWhen-EVENT">[TOC] X-LoadWhen-EVENT</a></li>
+					
+				</ul>
+				
+			</div>
+			
+			<div class="doc">
+				<h3><a name="[TOC] X-LoadWhen-EVENT"></a>[TOC] X-LoadWhen-EVENT(...)</h3>
+				<p>A TOC metadata field allowing addons to specify conditions for whether they should be loaded when an event listed in X-LoadWhen occurs. If not specified, it is assumed that the addon always wants to load on the event. This code will be executed during the specified event, and accepts the event and its args as varargs, which can be accessed through (...). If you need more code than you can fit in one TOC field, continue your string in X-LoadWhen-EVENT2, X-LoadWhen-EVENT3, etc.</p>
+				
+				<h4>Parameters</h4>
+				<ul>
+					
+					<li><pre class="code">...</pre>: Lua code that returns some value if the addon should be loaded, and returns false or nil otherwise.</li>
+					
+				</ul>
+				
+				
+				<h4>Usage</h4>
+				<ul>
+					
+					<li><pre class="code">## X-LoadWhen-PLAYER_ENTERING_WORLD: return (GetNumGroupMembers() > 0)</pre></li>
+					
+				</ul>
+				
+				
+
+				
+				<h4>See also</h4>
+				<ul>
+					
+					<li><a href="#[TOC] X-LoadWhen">[TOC] X-LoadWhen</a></li>
+					
+				</ul>
+				
+			</div>
+			
+			
+			
+		</div>
+	</body>
+</html>
