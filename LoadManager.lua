@@ -15,12 +15,11 @@ local function getTOCstring(index, field)
 		end
 		return str
 	end
-	return ""
 end
 
 local function getTOCfunc(addon, meta)
 	local str = getTOCstring(addon, meta)
-	return str ~= "" and safeassert("Invalid function in "..meta.." for "..(GetAddOnInfo(addon))..": ", loadstring(str))
+	return str and safeassert("Invalid function in "..meta.." for "..(GetAddOnInfo(addon))..": ", loadstring(str))
 end
 
 local loadhooks, afterfuncs = {}, {}
@@ -67,7 +66,7 @@ frame:SetScript("OnEvent", function(_, event, ...)
 					--@param icon Path to the icon the LDB launcher should use.
 					--@param name Optional name for the LDB launcher. If omitted, the name of the addon is used.
 					local ldbstring = getTOCstring(addon, "X-LoadBy-Launcher")
-					if ldbstring ~= "" then
+					if ldbstring then
 						local icon, launchername = string.split(" ", ldbstring, 2)
 						local name = GetAddOnInfo(addon)
 						local dobj, OnClick
@@ -85,7 +84,7 @@ frame:SetScript("OnEvent", function(_, event, ...)
 					--@param ... List of events to trigger conditional loading.
 					--@usage ## X-LoadWhen: GROUP_ROSTER_UPDATE, PLAYER_ENTERING_WORLD
 					--@see [TOC] X-LoadWhen-EVENT
-					for event in getTOCstring(addon, "X-LoadWhen"):gmatch("[%w_]+") do
+					for event in (getTOCstring(addon, "X-LoadWhen") or ""):gmatch("[%w_]+") do
 						loadhooks[event] = loadhooks[event] or {}
 						---A TOC metadata field allowing addons to specify conditions for whether they should be loaded when an event listed in X-LoadWhen occurs.
 						--If not specified, it is assumed that the addon always wants to load on the event.
