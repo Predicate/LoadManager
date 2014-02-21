@@ -57,7 +57,6 @@ local Dispatchers = setmetatable({}, {__index=function(self, argCount)
 	return dispatcher
 end})
 
---------------------------------------------------------------------------
 -- CallbackHandler:New
 --
 --   target            - target object to embed public APIs in
