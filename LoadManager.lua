@@ -63,8 +63,8 @@ frame:SetScript("OnEvent", function(_, event, ...)
 					--The created launcher will load the addon upon receiving any click from the user, and pass that click along to the data object's new OnClick handler, if present.
 					--@class function
 					--@name [TOC] X-LoadBy-Launcher
-					--@param icon Path to the icon the LDB launcher should use.
-					--@param name Optional name for the LDB launcher. If omitted, the name of the addon is used.
+					--@param icon Path to the icon the launcher should use.
+					--@param name Optional name for the launcher. If omitted, the name of the addon is used.
 					local launcherstring = getTOCstring(addon, "X-LoadBy-Launcher")
 					if launcherstring then
 						local icon, launchername = string.split(" ", launcherstring, 2)
