@@ -2,10 +2,7 @@
 ## Title: Load Manager
 ## Notes: A dynamic load manager for addons.
 ## Author: Predicate
+## RequiredDeps: DataRegistry
 ## OptionalDeps: BlankSlate
-
-libs/LibStub.lua
-libs/CallbackHandler-1.0.lua
-libs/LibDataBroker-1.1.lua
 
 LoadManager.lua

@@ -59,22 +59,22 @@ frame:SetScript("OnEvent", function(_, event, ...)
 				if loginhandler and loginhandler() then
 					load(addon, event, ...)
 				else
-					---A TOC metadata field allowing addons to specify that a LibDataBroker "launcher" dataobject should be created to trigger their loading.
-					--The created launcher will load the addon upon receiving any click from the user, and pass that click along to the addon's new LDB OnClick handler, if present.
+					---A TOC metadata field allowing addons to specify that a DataRegistry object of type "launcher" should be created to trigger their loading.
+					--The created launcher will load the addon upon receiving any click from the user, and pass that click along to the data object's new OnClick handler, if present.
 					--@class function
 					--@name [TOC] X-LoadBy-Launcher
 					--@param icon Path to the icon the LDB launcher should use.
 					--@param name Optional name for the LDB launcher. If omitted, the name of the addon is used.
-					local ldbstring = getTOCstring(addon, "X-LoadBy-Launcher")
-					if ldbstring then
-						local icon, launchername = string.split(" ", ldbstring, 2)
+					local launcherstring = getTOCstring(addon, "X-LoadBy-Launcher")
+					if launcherstring then
+						local icon, launchername = string.split(" ", launcherstring, 2)
 						local name = GetAddOnInfo(addon)
 						local dobj, OnClick
 						OnClick = function(...)
 							local ret = safeassert("Unable to load "..(GetAddOnInfo(addon))..", reason: ", LoadAddOn(addon))
 							if ret and dobj.OnClick ~= OnClick then dobj.OnClick(...) end
 						end
-						dobj = LibStub:GetLibrary("LibDataBroker-1.1"):NewDataObject(launchername or name, { type = "launcher", icon = icon, OnClick = OnClick, tocname = name })
+						dobj = DataRegistry.NewDataObject(launchername or name, { type = "launcher", icon = icon, OnClick = OnClick, tocname = name })
 					end
 					---A TOC metadata field allowing addons to specify events to trigger their loading.
 					--Each event may optionally have a corresponding X-LoadWhen-EVENT field.
