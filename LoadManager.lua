@@ -68,13 +68,14 @@ frame:SetScript("OnEvent", function(_, event, ...)
 					local launcherstring = getTOCstring(addon, "X-LoadBy-Launcher")
 					if launcherstring then
 						local icon, launchername = string.split(" ", launcherstring, 2)
-						local name = GetAddOnInfo(addon)
+						local name, title, notes = GetAddOnInfo(addon)
 						local dobj, OnClick
 						OnClick = function(...)
 							local ret = safeassert("Unable to load "..(GetAddOnInfo(addon))..", reason: ", LoadAddOn(addon))
 							if ret and dobj.OnClick ~= OnClick then dobj.OnClick(...) end
 						end
-						dobj = DataRegistry.NewDataObject(launchername or name, { type = "launcher", icon = icon, OnClick = OnClick, tocname = name })
+
+						dobj = DataRegistry.NewDataObject(launchername or name, { type = "launcher", icon = icon, OnClick = OnClick, desc = notes })
 					end
 					---A TOC metadata field allowing addons to specify events to trigger their loading.
 					--Each event may optionally have a corresponding X-LoadWhen-EVENT field.
