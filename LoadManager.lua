@@ -109,7 +109,7 @@ frame:SetScript("OnEvent", function(_, event, ...)
 		for addon, handler in pairs(loadhooks[event]) do
 			if IsAddOnLoaded(addon) then
 				loadhooks[event][addon] = nil
-			elseif  select(5, GetAddOnInfo(addon)) and handler(event, ...) then
+			elseif select(4, GetAddOnInfo(addon)) and handler(event, ...) then
 				load(addon, event, ...)
 				loadhooks[event][addon] = nil
 			end

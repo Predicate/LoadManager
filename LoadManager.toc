@@ -1,4 +1,4 @@
-## Interface: 50400
+## Interface: 60000
 ## Title: Load Manager
 ## Notes: A dynamic load manager for addons.
 ## Author: Predicate
